@@ -1,9 +1,8 @@
-"""Quickstart: seed a first workspace skeleton (empty workspace only) and the first self-build tasks (Stage 1, D3 §4.1).
+"""Quickstart: seed a first workspace skeleton (empty workspace only) and the first tasks.
 
-With [paths] workspace_dir pointing at the platform (kernel v2.6), the tasks below are the first P1→P2 backlog items of
-`platform/aop_platform_v0.1` (documentation first, then small queries with tests).
+The tasks below are small examples (documentation first, then small queries with tests).
 
-The workspace is the code the organization will build (the platform of D3 §4.5, `platform/` layer).
+The workspace is the code the agent proposes changes to.
 Tasks are ordered by risk class: documentation first (low), then small, testable code units.
 Nothing here touches kernel/, constitution.toml, permissions.toml or state/ other than the task queue.
 """
@@ -12,10 +11,10 @@ from __future__ import annotations
 from pathlib import Path
 
 WORKSPACE_SKELETON = {
-    "README.md": "# AOP platform workspace\n\nThis folder is built by the organization under the seed kernel's governance. "
+    "README.md": "# Governed workspace\n\nChanges to this folder are proposed by an agent under the seed kernel's governance. "
                  "Every change arrives as a proposal, is reviewed and approved by the human, and is applied only if the tests pass.\n",
     "src/__init__.py": "",
-    "src/aop/__init__.py": "\"\"\"AOP platform package (built under governance).\"\"\"\n__version__ = \"0.0.1\"\n",
+    "src/aop/__init__.py": "\"\"\"Example package (changed under governance).\"\"\"\n__version__ = \"0.0.1\"\n",
     "tests/test_smoke.py": "import sys, pathlib\nsys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))\n\n"
                            "from src.aop import __version__\n\n\ndef test_version_present():\n    assert __version__\n",
     "docs/README.md": "# Documentation\n\nArchitecture decision records live in docs/adr/. Each ADR has: context, options considered "
