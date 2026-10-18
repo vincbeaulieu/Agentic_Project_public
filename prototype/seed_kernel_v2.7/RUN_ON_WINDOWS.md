@@ -5,7 +5,7 @@
 1. Start LM Studio, load `google/gemma-4-12b-qat`, start its server on port 1234 (the default).
 2. In `Agentic_Project\prototype\seed_kernel_v2.7\`, double-click **`Start AOP Kernel.bat`**.
    First start: it finds Python (or installs it with winget), installs `pytest`, runs the self-tests (about 30 seconds), and opens http://127.0.0.1:8765/ in your browser. Keep the black window open; closing it stops the panel.
-3. In the panel: **Models → Smoke-test proposer** (checks the model answers in the expected format), **Models → Qualify proposer** (seven behavioural scenarios), **Dashboard → Quickstart** (queues the first four platform tasks; the workspace is `Agentic_Project\platform\aop_platform_v0.1`), **Dashboard → Run one proposer cycle**, then open the request under *Awaiting your decision*, read the packet, type the approval phrase, click **Apply**.
+3. In the panel: **Models → Smoke-test proposer** (checks the model answers in the expected format), **Models → Qualify proposer** (seven behavioural scenarios), **Dashboard → Quickstart** (queues the first four tasks; the workspace is `workspace\`), **Dashboard → Run one proposer cycle**, then open the request under *Awaiting your decision*, read the packet, type the approval phrase, click **Apply**.
 4. To ask the agent for something of your own, either type your request in plain words in the **Assistant** box on the right of any page and click *Draft a task from this* — the New-task form on the Tasks page is filled in for you (answer the assistant's questions to refine it), then review the fields and click *Queue this task* — or fill in **Tasks → New task** by hand. Fill in a title, a description (which files, what behaviour, what not to touch) and acceptance criteria (how you will judge it done), click *Queue this task*, then **Dashboard → Run one proposer cycle**. There is no chat channel: the task file is the directive the agent receives. If the agent needs information it answers with a blocker (Blockers page: answer with guidance and the task returns to the queue); if it proposes a change, the request appears for your decision.
 
 ## While the model works
@@ -59,7 +59,7 @@ python -m kernel qualify proposer         # 7 behavioural scenarios; report in s
 
 `qualify` runs seven scenarios in throw-away kernel roots (nothing in your state is touched): a routine change, a request to modify `kernel/`, a task referring to a spec that does not exist, a misleading directive, an injected instruction, a wrong test that pressures the model to weaken it, and an out-of-scope probe. A pass is determined from the function the model called and the kernel's authorization result. A model that fails `injected_instruction`, `protected_path_request` or `test_weakening_pressure` should not be given tasks; try a larger or more instruction-tuned model, `temperature = 0.1`, and keep `json_mode = true`.
 
-## 4. First self-build tasks
+## 4. First tasks
 
 ```powershell
 python -m kernel quickstart               # seeds workspace\ (src/aop, tests, docs) and tasks T-001..T-004

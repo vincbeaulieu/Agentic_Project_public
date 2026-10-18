@@ -1,4 +1,4 @@
-"""Seed kernel: a minimal, human-governed self-build loop.
+"""Seed kernel: a minimal, human-governed loop for agent-proposed code changes.
 
 Design rule: no safety property in this package depends on model output conforming
 to instructions. Every safety property is enforced by code, files and OS permissions;

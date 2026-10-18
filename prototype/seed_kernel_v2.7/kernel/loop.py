@@ -190,7 +190,7 @@ class Kernel:
 
     # ================================================================ registry
     def _resolve_workspace(self, layout: Layout) -> Layout:
-        """[paths] workspace_dir (v2.6): the governed workspace may live outside the kernel folder (e.g. the platform).
+        """[paths] workspace_dir (v2.6): the governed workspace may live outside the kernel folder (e.g. another project).
         Refused: the kernel root itself, anything inside state/ or kernel/, and any folder that contains the kernel root."""
         wd = str(self.c.section("paths").get("workspace_dir", "") or "").strip()
         if not wd:

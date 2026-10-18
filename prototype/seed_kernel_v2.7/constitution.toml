@@ -50,7 +50,7 @@ max_cycles_per_day = 40
 
 [paths]
 # workspace_dir: the governed workspace, relative to the kernel folder. Default "workspace" (inside the kernel
-# folder). Pointing it at the platform lets the agent build the platform under governance (kernel v2.6). The
+# folder). Pointing it at another project's folder places that project under governance (kernel v2.6). The
 # kernel refuses a value that overlaps its own folder, state/ or kernel/. The globs below are relative to it.
 workspace_dir = "workspace"
 # All other paths are relative to the WORKSPACE root (the folder the kernel is allowed

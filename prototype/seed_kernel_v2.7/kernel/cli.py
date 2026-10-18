@@ -18,7 +18,7 @@ is therefore audited and default-deny.
     python -m kernel serve [--interval S] [--max-cycles N]   continuous operation: propose until STOP/FREEZE or limit
     python -m kernel doctor                      environment, models, isolation and test-suite checks
     python -m kernel qualify [PRINCIPAL]         run the behavioural qualification scenarios against the configured model
-    python -m kernel quickstart                  seed the workspace skeleton and the first self-build tasks (T-001..T-004)
+    python -m kernel quickstart                  seed the workspace skeleton and the first tasks (T-001..T-004)
     python -m kernel ui [--port 8765] [--no-browser]   local control panel on 127.0.0.1 (dashboard, requests, blockers, incidents, models, audit)
 """
 from __future__ import annotations
@@ -43,7 +43,7 @@ def _print_result(res, ok_msg: str) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(prog="kernel", description="seed kernel v2.0 - default-deny, human-governed self-build loop")
+    ap = argparse.ArgumentParser(prog="kernel", description="seed kernel v2.0 - default-deny, human-governed loop for agent-proposed code changes")
     ap.add_argument("--root", default=".")
     sub = ap.add_subparsers(dest="cmd", required=True)
     for n in ("init", "status", "propose", "verify-audit", "checkpoints", "freeze", "unfreeze", "resume", "blockers", "incidents", "police"):
