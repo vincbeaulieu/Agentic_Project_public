@@ -1,0 +1,215 @@
+# ============================================================================
+# SEED KERNEL CONSTITUTION  (v0.1)
+# ----------------------------------------------------------------------------
+# This file is the ONLY source of authority for the seed kernel.
+# It is read by the kernel process, never by the model. The model receives a
+# human-readable summary of it in its context, but the kernel enforces it
+# regardless of what any model says or generates.
+#
+# RULE OF THE FILE: agents never edit this file. The kernel refuses any
+# proposal that touches it (see [paths] denied_globs), and the file's SHA-256
+# is written into every audit event so a silent change is detectable.
+#
+# Values are set for Stage 1: every mutation requires a human decision.
+# Loosening any of them is a human decision, made by editing this file by hand,
+# and is itself recorded in the audit chain at the next kernel start.
+# ============================================================================
+
+[meta]
+version = "0.8.0"
+owner = "human"                       # the only principal that can change this file
+project = "Agentic_Project seed kernel"
+stage = 1                             # 1 = every mutation requires explicit human approval
+
+[human_authority]
+# Literal phrases. The kernel compares them byte-for-byte (after trimming
+# whitespace). Model output is not an input to the approval check: only a file
+# containing exactly these strings, in the approvals directory, is accepted.
+approval_phrase = "I APPROVE {request_id}"
+rejection_phrase = "I REJECT {request_id}"
+resume_phrase = "I RESUME THE KERNEL"
+project_implementation_phrase = "YOU MAY IMPLEMENT THIS PROJECT"
+approval_ttl_hours = 72                # a pending request expires (becomes void) after this
+
+[autonomy]
+# Level 0: kernel may only READ and REPORT. No proposals.
+# Level 1: kernel may PROPOSE changes; every change needs human approval before apply.
+# Level 2+ : reserved for later stages; the seed kernel refuses to run above 1.
+level = 1
+max_proposals_per_task = 3            # after this many rejected/failed proposals the task is parked
+
+[budget]
+# Circuit breakers. Any breach halts the kernel (soft halt) and writes a report.
+max_model_calls_per_cycle = 4
+max_output_chars_per_call = 60000
+max_cycle_wall_seconds = 900
+max_test_wall_seconds = 300
+max_patch_files = 12
+max_patch_total_chars = 120000
+max_cycles_per_day = 40
+
+[paths]
+# workspace_dir: the governed workspace, relative to the kernel folder. Default "workspace" (inside the kernel
+# folder). Pointing it at the platform lets the agent build the platform under governance (kernel v2.6). The
+# kernel refuses a value that overlaps its own folder, state/ or kernel/. The globs below are relative to it.
+workspace_dir = "workspace"
+# All other paths are relative to the WORKSPACE root (the folder the kernel is allowed
+# to change). The kernel's own code and state live OUTSIDE the workspace.
+allowed_write_globs = [
+  "src/**",
+  "docs/**",
+  "tests/**",
+  "README.md",
+]
+# Anything matching these is refused at policy time even if it also matches an
+# allowed glob. Order of evaluation: denied first, then allowed, else refused.
+denied_globs = [
+  "constitution.toml",
+  "kernel/**",
+  "state/**",
+  ".git/**",
+  "**/*.pem", "**/*.key", "**/.env", "**/secrets*",
+]
+# Files whose modification is flagged for MANDATORY human attention (the monitor
+# raises a "protected_test_change" flag and the approval request is marked HIGH RISK).
+protected_test_globs = [
+  "tests/**",
+  "pytest.ini", "pyproject.toml", "setup.cfg", "tox.ini", "conftest.py", "**/conftest.py",
+]
+
+[execution]
+# Command allow-list for the sandboxed test step. The kernel never executes an
+# arbitrary string proposed by a model; it only runs the configured test
+# command, in the workspace, with a stripped environment and a timeout.
+test_command = ["python", "-m", "pytest", "-q", "-x", "--no-header", "-p", "no:cacheprovider"]
+network_allowed = false               # informational; enforced by the sandbox where available
+env_allowlist = ["PATH", "LANG", "LC_ALL", "PYTHONHASHSEED", "SYSTEMROOT", "TEMP", "TMP", "HOME"]
+max_test_memory_mb = 1024
+max_test_processes = 64
+
+[monitor]
+# Rule-based monitor (always on) + optional model monitor (a different model /
+# endpoint from the proposer; see D3 SR-04 on correlated monitor errors).
+# Flag semantics: BLOCK flags mark hard-constraint violations (not applied; incident record for
+# the kernel/halt/secret cases). ESCALATE flags mark changes that require human review with a
+# banner because of their consequence class, not because of assumed intent.
+block_on_flags = ["denied_path", "secret_material", "self_modification", "halt_control_reference"]
+escalate_on_flags = ["protected_test_change", "review_pattern_match", "network_call", "encoded_blob", "test_count_decreased",
+                     "evidence_block_missing", "unsourced_claim", "underived_conclusion", "depends_on_hypotheses"]
+review_patterns = [
+  "os.system(", "subprocess.", "socket.", "urllib.request", "requests.", "httpx.",
+  "eval(", "exec(", "__import__(", "ctypes.", "base64.b64decode", "pickle.loads",
+  "sys.exit(0)", "pytest.skip", "@pytest.mark.skip", "AlwaysEqual", "__eq__",
+  "conftest", "STOP", "approvals", "state/", "constitution.toml", "kernel/",
+]
+model_monitor_enabled = false         # set true and configure [models.monitor] to enable
+model_monitor_block_score = 0.8       # 0..1 risk score above which the proposal is blocked
+
+[models]
+# The kernel is model-agnostic. Providers:
+#   "dummy"               offline, for tests
+#   "lmstudio"            LM Studio local server (OpenAI-compatible; default http://localhost:1234/v1)
+#   "ollama"              Ollama native API (default http://localhost:11434); json_mode supported
+#   "openai_compatible"   any /v1/chat/completions server: Ollama (/v1), llama.cpp, vLLM, HF TGI, OpenAI, gateways
+#   "huggingface_local"   in-process Transformers pipeline (pip install transformers torch); model = repo id or local path
+#   "huggingface_router"  Hugging Face inference router (remote; requires HF_TOKEN and allow_remote_endpoints = true)
+# API keys are never stored here: they come from the environment variable named in api_key_env and
+# are never written to logs, prompts, or reports.
+# Remote endpoints are refused unless allow_remote_endpoints is true (privacy default: project data
+# stays on this machine; see D3 §14 data-classification decision).
+allow_remote_endpoints = false
+
+[models.proposer]
+provider = "lmstudio"                 # "dummy" (offline) | "lmstudio" | "ollama" | "openai_compatible" | "huggingface_local"
+base_url = "http://127.0.0.1:1234/v1"
+model = "qwen/qwen3.5-9b"             # the model id shown in LM Studio / `python -m kernel models probe`; LM Studio loads whatever id is named here
+api_key_env = "SEED_PROPOSER_API_KEY"
+temperature = 0.2
+max_tokens = 8000
+json_mode = true                      # ask the server for a JSON object (LM Studio, Ollama, vLLM support it)
+stream = true                         # v2.7: stream the reply so the panel shows reasoning live and Cancel works
+timeout_seconds = 300                 # with stream = true: idle time allowed between two chunks; otherwise the whole call
+max_wall_seconds = 1800               # hard bound on one call (0 = none); the panel's Cancel remains available
+# Reasoning control (passed through to the server unchanged). Qwen3 honours enable_thinking on servers that accept
+# chat_template_kwargs (llama.cpp, vLLM; LM Studio may ignore it). Remove the line to let the model think.
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+[models.monitor]
+# A different model family from the proposer (D3 SR-04).
+provider = "dummy"
+base_url = "http://localhost:11434"
+model = "local-monitor-model"
+api_key_env = "SEED_MONITOR_API_KEY"
+temperature = 0.0
+max_tokens = 2000
+json_mode = true
+
+[models.police]
+# Police LLM (behavioural review; flags only). Optional; leave "dummy" to disable.
+provider = "dummy"
+base_url = "http://localhost:11434"
+model = "local-police-model"
+temperature = 0.0
+max_tokens = 2000
+json_mode = true
+
+[models.assistant]
+# Task-drafting assistant of the control panel sidebar (kernel v2.5). It has no authority and no function
+# interface: it only turns the human's free-text request into a draft of the task fields, which the human
+# reviews and queues. provider = "proposer" reuses the proposer model above; "dummy" disables the sidebar;
+# any other provider block (lmstudio, ollama, ...) uses a separate model. Calls are audited as task_drafted.
+provider = "proposer"
+
+[reporting]
+report_dir = "reports"
+digest_every_hours = 24
+
+# ----------------------------------------------------------------------------
+# Operating model (D3 §7.5). The kernel enforces the categories below as follows:
+#   hard constraints      -> policy engine BLOCK; halt controller; path jail (machine-enforced)
+#   authorized operations -> status = "proposal" within allowed paths, then human approval
+#   judgment decisions    -> choice of implementation within a proposal; recorded in "facts",
+#                            "assumptions", "considered_actions"
+#   escalation conditions -> status = "escalate": task is paused, a blocker record is written,
+#                            nothing is changed, the next independent task can proceed
+#   post-incident analysis-> incident records opened automatically for the events listed in
+#                            [incidents]; findings recorded by the human
+# ----------------------------------------------------------------------------
+
+[escalation]
+blocker_dir = "blockers"              # under state/; one record per blocked task
+# Consequence classes that always require external review before an action is taken,
+# regardless of technical complexity. Informational for the model; the kernel enforces the
+# subset it can observe (paths, patterns, protected files) and the human enforces the rest
+# at review time.
+high_stakes_consequences = [
+  "affects a system or person outside this machine (email, message, filing, API call, publication)",
+  "creates a legal, contractual, financial or reputational obligation or exposure",
+  "changes durable state that cannot be restored from a checkpoint (external records, deletions outside the workspace)",
+  "discloses or moves confidential or personal information",
+  "changes a security or authority boundary (permissions, credentials, sandbox, allow-lists)",
+  "changes a safeguard, test, monitor rule, constitution or kernel component",
+  "changes the public-facing behaviour of the system",
+]
+
+[evidence]
+# Evidentiary standard (R03). The kernel enforces the observable subset: a proposal must carry the
+# six-category evidence block; a "sourced" item must name its source; a "derived" item must list its
+# premises; a proposal that lists unverified hypotheses is escalated so the human decides whether any
+# hypothesis is load-bearing. The remainder (whether a listed fact is in fact verified) is checked at review.
+require_evidence_block = true
+
+[reflection]
+# Refresher insertion is machine-triggered by activity, not by the model's memory.
+# After either threshold is exceeded, the kernel prepends the refresher text (state/training/refresher.md,
+# maintained by the human: incidents, near misses, escalation examples; a built-in default is used
+# if the file does not exist) to the next proposer prompt and resets the counters.
+refresher_every_model_calls = 20
+refresher_every_output_chars = 400000
+
+[incidents]
+incident_dir = "incidents"            # under state/
+# Events for which the kernel opens an incident record automatically. Findings on judgment
+# are recorded later by the human with `python -m kernel finding`.
+open_on = ["rollback_after_tests_failed", "block_self_modification", "block_halt_control_reference",
+           "block_secret_material", "audit_chain_inconsistent", "budget_breaker", "directive_defect_reported"]
