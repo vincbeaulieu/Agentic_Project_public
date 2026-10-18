@@ -1,6 +1,6 @@
 # Agentic_Project — workspace index
 
-Project: a persistent, human-governed organization of AI agents (working name AOP): live agents on a constitution-bound hierarchy, entered through team (TWE) and individual (IWE) work environments from a control-plane GUI, planning under the human's approval and operating continuously. This file is the index of the workspace; it is updated whenever a file is added, moved or superseded.
+Project: a persistent, human-governed organization of AI agents (working name AOP): live agents on a constitution-bound hierarchy, entered through team (TWE) and individual (IWE) work environments from a control-plane GUI, planning under the human's approval and operating continuously. The kernel was designed for the hardest case: agents proposing changes to the platform they themselves run on. Every change needs explicit human approval and passing tests, and the kernel, its constitution and its permissions are outside any agent's reach. This file is the index of the workspace; it is updated whenever a file is added, moved or superseded.
 
 This is the public edition of the workspace. It contains the governance kernel (D5), the rules (D6), the security sections of the development plan (D3) and the capability security review. The source documents (D0–D2), the rest of the development plan (D3), the prototype specification (D4), the platform (D7), the other audits and reviews, and the earlier kernel versions are not included; references to them in the documents below point to that material.
 
