@@ -1,0 +1,81 @@
+# ============================================================================
+# PERMISSIONS  (v0.1)  — explicit capabilities per principal (rule R04)
+# ----------------------------------------------------------------------------
+# Default-deny: a principal can call a kernel function only if it holds the
+# function's required permission with a scope that covers every resource the
+# call touches. Absence of an entry means DENY. This file is protected state:
+# it is outside every agent's write scope, its SHA-256 is recorded in the audit
+# chain at every kernel start, and no kernel function modifies it
+# (MODIFY_PERMISSIONS is defined but assigned to nobody; the human edits the file).
+#
+# Scope syntax: glob over a resource string. Resource strings are namespaced:
+#   workspace/<relative path>     files the proposer may read or propose
+#   twe/<twe_id>                  a team work environment log
+#   request/<request_id>          a submitted request
+#   approval/<request_id>         an approval record
+#   audit/*                       the audit ledger (read-only functions only)
+#   police/*                      police records
+#   self                          the caller's own profile
+# ============================================================================
+
+[meta]
+version = "0.1.0"
+owner = "human"
+
+# ---- the proposer LLM: requester and reasoning component only -----------------
+[[principals]]
+id = "proposer"
+kind = "agent"
+twe = "twe/proposer"
+capabilities = [
+  { permission = "PROFILE_READ",   scope = "self" },
+  { permission = "WORKSPACE_READ", scope = "workspace/**" },
+  { permission = "PROPOSE_PATCH",  scope = "workspace/src/**" },
+  { permission = "PROPOSE_PATCH",  scope = "workspace/docs/**" },
+  { permission = "PROPOSE_PATCH",  scope = "workspace/tests/**" },
+  { permission = "PROPOSE_PATCH",  scope = "workspace/README.md" },
+  { permission = "TWE_READ",       scope = "twe/proposer" },
+  { permission = "TWE_APPEND",     scope = "twe/proposer" },
+]
+
+# ---- the human: root authority for this deployment ----------------------------
+[[principals]]
+id = "human"
+kind = "human"
+twe = "twe/human"
+capabilities = [
+  { permission = "PROFILE_READ",     scope = "self" },
+  { permission = "WORKSPACE_READ",   scope = "workspace/**" },
+  { permission = "TWE_READ",         scope = "twe/*" },
+  { permission = "TWE_APPEND",       scope = "twe/*" },
+  { permission = "APPROVAL_READ",    scope = "approval/*" },
+  { permission = "APPROVAL_APPEND",  scope = "approval/*" },
+  { permission = "APPLY_PATCH",      scope = "workspace/**" },
+  { permission = "RUN_TESTS",        scope = "workspace/**" },
+  { permission = "AUDIT_READ",       scope = "audit/*" },
+  { permission = "POLICE_READ",      scope = "police/*" },
+  { permission = "INVESTIGATION_READ", scope = "police/*" },
+]
+
+# ---- the police subsystem: monitoring and investigation, no authorization power
+[[principals]]
+id = "police"
+kind = "service"
+twe = "twe/police"
+capabilities = [
+  { permission = "PROFILE_READ",         scope = "self" },
+  { permission = "AUDIT_READ",           scope = "audit/*" },
+  { permission = "POLICE_EVENT_APPEND",  scope = "police/*" },
+  { permission = "INVESTIGATION_CREATE", scope = "police/*" },
+  { permission = "INVESTIGATION_READ",   scope = "police/*" },
+  { permission = "ESCALATION_REQUEST",   scope = "twe/human" },
+]
+
+# ---- the monitor model (second opinion on proposals): read-only, no authority --
+[[principals]]
+id = "monitor"
+kind = "service"
+twe = "twe/monitor"
+capabilities = [
+  { permission = "PROFILE_READ", scope = "self" },
+]
