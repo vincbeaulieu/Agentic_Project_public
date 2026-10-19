@@ -1,4 +1,5 @@
 # Agentic_Project — workspace index
+* You'll find the prototype under prototype/seed_kernel_v2.7
 
 Project: a persistent, human-governed organization of AI agents (working name AOP): live agents on a constitution-bound hierarchy, entered through team (TWE) and individual (IWE) work environments from a control-plane GUI, planning under the human's approval and operating continuously. The kernel was designed for the hardest case: agents proposing changes to the platform they themselves run on. Every change needs explicit human approval and passing tests, and the kernel, its constitution and its permissions are outside any agent's reach. This file is the index of the workspace; it is updated whenever a file is added, moved or superseded.
 
