@@ -2,7 +2,7 @@
 
 This folder is the public edition of the workspace in which an AI assistant (Claude) and I built, tested and enforced a working
 method for AI-assisted technical work in a regulated setting. It is the practice that comes before the governance kernel in
-`prototype/`: here the controls are applied to real work by an assistant under rules I set; the kernel turns the same principles
+`02_prototype/`: here the controls are applied to real work by an assistant under rules I set; the kernel turns the same principles
 into a default-deny platform that the agent cannot bypass.
 
 The workspace grew out of one task: revising a long technical report with AI help, where every change had to be traceable,

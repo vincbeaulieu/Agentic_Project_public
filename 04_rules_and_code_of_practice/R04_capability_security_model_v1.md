@@ -2,7 +2,7 @@
 
 **Status:** Authoritative rule. Human-authored (project owner), 24 September 2026. Version 1.
 **Applies to:** the kernel, the runtime, every agent interface, the TWE and approval subsystems, the audit subsystem, the police subsystem, OS-level deployment, and the security acceptance criteria of the MVP.
-**Enforcement:** implemented in `prototype/seed_kernel_v2.0/` (authorization engine, function registry, runtime contexts, TWE service, approval binding, police engine, audit schema, security regression suite) and specified in D3 §6.6 and D4 B.5.14–B.5.19; the mapping of each section and acceptance criterion to its implementation and test is in `03_audits_and_reviews/06_capability_security_review_v1.md`.
+**Enforcement:** implemented in `02_prototype/seed_kernel_v2.0/` (authorization engine, function registry, runtime contexts, TWE service, approval binding, police engine, audit schema, security regression suite) and specified in D3 §6.6 and D4 B.5.14–B.5.19; the mapping of each section and acceptance criterion to its implementation and test is in `03_audits_and_reviews/06_capability_security_review_v1.md`.
 **Amendment:** by a new version file; this file is not modified.
 
 ---
