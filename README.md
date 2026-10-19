@@ -1,5 +1,5 @@
 # Agentic_Project — workspace index
-* You'll find the prototype under prototype/seed_kernel_v2.7
+* You'll find the prototype under 02_prototype/seed_kernel_v2.7
 
 Project: a persistent, human-governed organization of AI agents (working name AOP): live agents on a constitution-bound hierarchy, entered through team (TWE) and individual (IWE) work environments from a control-plane GUI, planning under the human's approval and operating continuously. The kernel was designed for the hardest case: agents proposing changes to the platform they themselves run on. Every change needs explicit human approval and passing tests, and the kernel, its constitution and its permissions are outside any agent's reach. This file is the index of the workspace; it is updated whenever a file is added, moved or superseded.
 
@@ -13,7 +13,7 @@ Agentic_Project/
   01_development_plan/            D3: security sections of the project development plan (§6.6, §7.2–§7.4)
   03_audits_and_reviews/          capability security review (R04 → implementation and tests)
   04_rules_and_code_of_practice/  D6: human-authored rules for the agents (R01–R06), stored verbatim; normative source of D3 §6.6, §7.5–§7.9 and of the agent specification
-  prototype/                      D5: runnable seed kernel, current version
+  02_prototype/                      D5: runnable seed kernel, current version
 ```
 
 Rules: no file is overwritten; a change produces a new versioned file (`_v1.1`, `_v2`, …) or a new version folder. The exception is this index, which is updated in place because it describes the current state of the workspace. The current version of each document is listed below; earlier versions remain in place for history. Reviews and audits are numbered from 03 onward in `03_audits_and_reviews/`.
@@ -23,15 +23,15 @@ Rules: no file is overwritten; a change produces a new versioned file (`_v1.1`, 
 | Ref | Current file | Earlier versions | Content |
 |---|---|---|---|
 | D3 | `01_development_plan/01_project_development_plan_v1.6_security_excerpt.md` | — | Excerpt of the development plan: security architecture (§6.6), threat model mapped to the OWASP Top 10 for agentic applications (§7.2), control protocols by stage (§7.3), safety case structure (§7.4) |
-| D5 | `prototype/seed_kernel_v2.7/` | not included | Governance kernel for agent-proposed code changes (default-deny function calls, literal-phrase approvals, audit chain, halt, police pipeline, local models, control panel); 91 tests |
+| D5 | `02_prototype/seed_kernel_v2.7/` | not included | Governance kernel for agent-proposed code changes (default-deny function calls, literal-phrase approvals, audit chain, halt, police pipeline, local models, control panel); 91 tests |
 | D6 | `04_rules_and_code_of_practice/` — `R01_language_and_objectivity_standard_v1.md`, `R02_operating_model_and_disciplined_autonomy_v1.md`, `R03_evidentiary_standard_v1.md`, `R04_capability_security_model_v1.md`, `R05_service_orientation_and_professional_identity_v2.md` (v1 retained), `R06_professional_judgment_feasibility_risk_and_alternatives_v2.md` (v1 retained), `README.md` | — | Rules and code of practice for the agents, verbatim as issued, with headers and amendments |
 | — | `03_audits_and_reviews/06_capability_security_review_v1.md` | — | Integration of R04 (kernel v1.3 → v2.0): section map, AC-01…AC-30 and I1–I18 to tests, limits |
 
-Note on this edition: the kernel's governed workspace is the local folder `prototype/seed_kernel_v2.7/workspace` (`workspace_dir` in `constitution.toml`).
+Note on this edition: the kernel's governed workspace is the local folder `02_prototype/seed_kernel_v2.7/workspace` (`workspace_dir` in `constitution.toml`).
 
 ## Where to start
 
-The rules are in `04_rules_and_code_of_practice/README.md`; R04 is the security model the kernel implements: nothing is permitted unless explicit authority has been granted, and the model is a requester, never an authority. The kernel (D5) governs agent-proposed code changes and is started with `prototype/seed_kernel_v2.7/Start AOP Kernel.bat` (Windows; it checks for Python 3, installs the one dependency, runs the self-tests on first start and opens the control panel at http://127.0.0.1:8765/), or from the command line with `python -m kernel ...`. `prototype/seed_kernel_v2.7/README.md` explains its architecture; `tests/test_security.py` holds the security tests mapped to R04's acceptance criteria and invariants (see the review in `03_audits_and_reviews/`); `cd prototype/seed_kernel_v2.7 && python -m pytest` runs the whole suite. The security architecture, threat model, control protocols and safety case are in `01_development_plan/`.
+The rules are in `04_rules_and_code_of_practice/README.md`; R04 is the security model the kernel implements: nothing is permitted unless explicit authority has been granted, and the model is a requester, never an authority. The kernel (D5) governs agent-proposed code changes and is started with `02_prototype/seed_kernel_v2.7/Start AOP Kernel.bat` (Windows; it checks for Python 3, installs the one dependency, runs the self-tests on first start and opens the control panel at http://127.0.0.1:8765/), or from the command line with `python -m kernel ...`. `02_prototype/seed_kernel_v2.7/README.md` explains its architecture; `tests/test_security.py` holds the security tests mapped to R04's acceptance criteria and invariants (see the review in `03_audits_and_reviews/`); `cd 02_prototype/seed_kernel_v2.7 && python -m pytest` runs the whole suite. The security architecture, threat model, control protocols and safety case are in `01_development_plan/`.
 
 ## Authorship
 

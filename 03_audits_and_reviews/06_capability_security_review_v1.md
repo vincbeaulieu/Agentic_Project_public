@@ -2,7 +2,7 @@
 
 **Version:** 1.0 — 24 September 2026
 **Rule integrated:** R04 (`04_rules_and_code_of_practice/R04_capability_security_model_v1.md`), stored verbatim.
-**Scope:** `prototype/seed_kernel_v2.0/` (new modules `authz.py`, `twe.py`, `police.py`; rewritten `loop.py`, `cli.py`, `audit.py`; `permissions.toml`; `tools/`), D3 §6.6 and SR-24…SR-31, D4 B.5.14–B.5.19.
+**Scope:** `02_prototype/seed_kernel_v2.0/` (new modules `authz.py`, `twe.py`, `police.py`; rewritten `loop.py`, `cli.py`, `audit.py`; `permissions.toml`; `tools/`), D3 §6.6 and SR-24…SR-31, D4 B.5.14–B.5.19.
 
 ## 1. Architectural changes from v1.3
 

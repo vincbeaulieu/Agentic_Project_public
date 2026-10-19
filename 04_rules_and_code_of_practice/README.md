@@ -13,7 +13,7 @@ This folder holds the human-authored rules that govern the organization's agents
 
 ## Relation to other governance artifacts
 
-The constitution (`prototype/seed_kernel_v*/constitution.toml`) is the machine-enforced subset of these rules plus the project-specific limits (paths, budgets, phrases). Where a rule can be enforced by code, the kernel enforces it and the rule text is informational for the agent; where it cannot, the rule is stated in the agent's instructions and enforced at review. The principle-to-enforcement maps in `03_audits_and_reviews/` record which is which for each provision.
+The constitution (`02_prototype/seed_kernel_v*/constitution.toml`) is the machine-enforced subset of these rules plus the project-specific limits (paths, budgets, phrases). Where a rule can be enforced by code, the kernel enforces it and the rule text is informational for the agent; where it cannot, the rule is stated in the agent's instructions and enforced at review. The principle-to-enforcement maps in `03_audits_and_reviews/` record which is which for each provision.
 
 Precedence when texts differ: the constitution (machine-enforced) > these rules > D3 > D4 > agent-specific instructions. A conflict between a rule and the constitution is an escalation condition and is resolved by the human.
 

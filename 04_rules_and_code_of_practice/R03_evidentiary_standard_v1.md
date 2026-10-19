@@ -2,7 +2,7 @@
 
 **Status:** Authoritative rule. Human-authored (project owner), 24 September 2026. Version 1.
 **Applies to:** every agent of the organization, at every stage; every proposal, report, plan, blocker, escalation and deliverable.
-**Enforcement:** the observable subset is machine-enforced by the kernel (see `01_development_plan` D3 §7.9 and `prototype/seed_kernel_v1.3/`); the remainder is enforced at human review and by qualification and re-qualification evaluations.
+**Enforcement:** the observable subset is machine-enforced by the kernel (see `01_development_plan` D3 §7.9 and `02_prototype/seed_kernel_v1.3/`); the remainder is enforced at human review and by qualification and re-qualification evaluations.
 **Amendment:** by a new version file (`R03_..._v2.md`); this file is not modified.
 
 ---
