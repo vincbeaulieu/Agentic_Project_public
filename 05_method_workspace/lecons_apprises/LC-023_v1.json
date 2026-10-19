@@ -1,0 +1,15 @@
+{
+ "application": "Relay: lancer_relais_pc_v2 + installer_relais_pc_v3 (approvals in %LOCALAPPDATA%\\ClaudeRelais). Skill sync-cloud-pc: relay section to be added with this rule.",
+ "controle": "Static test of the installer (approval before the task); review of every new launcher or scheduled task.",
+ "date": "2026-10-16",
+ "id": "LC-023",
+ "preuve": "Tests test_relais_github_v5: Lanceur.test_version_deposee_non_approuvee, test_version_modifiee_non_executee.",
+ "regle": "A mechanism that delivers files to the PC must not be able to make new code run there without an explicit action by the user. An automatic update of a script run by a scheduled task goes through an approval list (name + SHA-256 checksum) kept out of the channel's reach; an unapproved or modified version does not run, the previous one continues and the wait is reported.",
+ "skills": [
+  "sync-cloud-pc",
+  "cadre-travail-deterministe"
+ ],
+ "source": "Design of the GitHub relay (2026-10-16): the first stable launcher (lancer_relais_pc_v1) ran the highest version of relais_pc_vN.ps1 in its folder, a folder that the relay itself can fill; removed from the delivery before installation.",
+ "statut": "proposee",
+ "titre": "A backup channel never runs received code without the user's approval"
+}

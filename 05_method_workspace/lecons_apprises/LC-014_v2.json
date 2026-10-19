@@ -1,0 +1,15 @@
+{
+ "application": "Split briefs so that an agent fits in ~20 min; read the messages received before each new wave.",
+ "controle": "manuel",
+ "date": "2026-10-15",
+ "id": "LC-014",
+ "preuve": "Message received mid-turn on 15 Oct. (\"performance …\") with a tool result.",
+ "regle": "Background tasks are disabled here; the user's messages arrive with the result of the next tool call: agents in short waves (5 at most, ~20 min), messages read at the end of each wave, resumption scheduled by a single send if the turn ends.",
+ "skills": [
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive"
+ ],
+ "source": "The user, message of 15 Oct.; observation of the environment",
+ "statut": "validee",
+ "titre": "Stay reachable while agents are running"
+}

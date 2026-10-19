@@ -1,0 +1,16 @@
+{
+ "application": "Never build a base by accepting the reviewers' revisions; they remain tracked in the deliverable.",
+ "controle": "evaluer_travail:L3",
+ "date": "2026-10-15",
+ "id": "LC-010",
+ "preuve": "rev1 and v8.0.0 (D3/D8) had accepted all the reviewers' revisions; F310.",
+ "regle": "Colleague A, Colleague B, Colleague C and the guests have the authority to flag; their direct edits are suggestions subject to the same check and are never accepted in bulk; each receives a verdict (retained, adjusted, not retained, author's decision).",
+ "skills": [
+  "application-corrections-rapport",
+  "revue-critique-rapport",
+  "orchestration-agents-recursive"
+ ],
+ "source": "rev1, thread F315",
+ "statut": "validee",
+ "titre": "Reviewers flag, the author decides"
+}

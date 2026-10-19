@@ -1,0 +1,14 @@
+{
+ "id": "LC-031",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "Student agents in parallel with my solo reference: minimal context, strict comparison, learning in both directions",
+ "regle": "For a delegated task: (1) from the scoping stage, I split the work and launch the agents, each with the MINIMAL context needed for its task (the slice, the rule that applies, an example, the output format, the search tool), without access to my work; (2) meanwhile I do the task alone and save it before reading their results; (3) I compare the agents' assembled work with mine point by point (agreements, disagreements, what they saw and I did not, what I saw and they did not) and I settle each disagreement on evidence, never in my favour by default; (4) what they saw and I did not corrects my work, my tools and my skills; what they missed improves their instructions (contextualise, condense, explain, guide, inform); (5) the deliverable is the best of the two, strictly validated; (6) the performance audit (per agent, per model, per instruction) prepares the next time. No sequential pilot with a single agent reviewed at 100%: a single agent = a single bias, and reviewing = judging with my own biases. Balance speed / quality.",
+ "source": "The user's messages of 2026-10-16: \"decision and evaluation of the edits made without context; no guidance; lack of evaluation of the mentor agent\"; \"you must determine the minimum that each individual agent needs\"; \"do the work solo, save it, and use it to compare the combined work of your student agents […] you must learn from them\"; \"no, that is not the right approach\" (single-agent pilot).",
+ "preuve": "14_travail_finition revisions (v6.0.9): agent replies `Traité` (\"Addressed\") contradicted at the check (threads 679, 681, 696); residues \"adjacent. the\", truncated sentence at §A.3.6.",
+ "application": "Skill orchestration-agents-recursive (v6 proposed); every delegation.",
+ "controle": "Each delegation has a timestamped reference_solo_vN.json written before agent outputs are read, and an audit_comparaison_vN.md (agreements, disagreements settled on evidence, contributions of the agents, contributions of the reference, causes, changes to instructions and tools).",
+ "skills": [
+  "orchestration-agents-recursive"
+ ]
+}

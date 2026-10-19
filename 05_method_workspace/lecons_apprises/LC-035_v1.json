@@ -1,0 +1,15 @@
+{
+ "id": "LC-035",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "Consult the tool catalogue before creating a tool; keep it up to date; generalise the tools into a universal toolbox",
+ "regle": "Before writing a tool: search the tool catalogue (and chercher_outil) for a tool that already does the job, and extend it (new version, tests, adoption) rather than writing a parallel one. A project script that is useful beyond the task is generalised (parameters instead of hard-coded paths, standard header, negative tests) and then promoted into outils/ by preparer/adopter, and the catalogue is regenerated. Tools are called by their shortcut (outils/<outil>.py), never by the versioned file. Goal: a toolbox that covers every situation already met and fixed, so as to decide correctly when facing new ones.",
+ "source": "The user's message of 2026-10-16: \"it is important that you consult the catalogue before creating new tools, and also keep this catalogue well up to date and generalise your tools well so as to have a toolbox of tools universal to any situation you have previously encountered and fixed\".",
+ "preuve": "Session of 2026-10-16: porte_livraison written although livrer and evaluer_travail exist; verifier_noms written although detecter_noms works through its shortcut (wrongly called by its versioned file); scripts of 17_comparaison not promoted.",
+ "application": "Skills cadre-travail-deterministe and orchestration-agents-recursive (Step 0); tools chercher_outil, catalogue, organiser_outils.",
+ "controle": "Every new tool carries in its header \"CATALOGUE CONSULTÉ : <neighbouring tools examined>\"; the catalogue is regenerated after each adoption.",
+ "skills": [
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive"
+ ]
+}

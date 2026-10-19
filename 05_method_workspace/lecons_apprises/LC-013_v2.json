@@ -1,0 +1,14 @@
+{
+ "application": "evaluer_travail at the end of each step and before each delivery; verdict `CONFORME` (\"COMPLIANT\") required.",
+ "controle": "evaluer_travail:O1,O2,O3,O4,O5,O6,N1,N2,N3,N4,N5,E1,E2,E3,E4,E5",
+ "date": "2026-10-15",
+ "id": "LC-013",
+ "preuve": "Instruction.",
+ "regle": "Mandatory folders (00_sources … 98_livrables, 99_livrables_modifiables) and versioned name format; every deliverable passes evaluer_travail before delivery.",
+ "skills": [
+  "cadre-travail-deterministe"
+ ],
+ "source": "The user, messages of 15 Oct.; CLAUDE.md",
+ "statut": "validee",
+ "titre": "Strict organisation and naming, evaluated by default"
+}

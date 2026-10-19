@@ -1,0 +1,14 @@
+{
+ "application": "relais_github_v3 (log _gestion/plans/relais_github/<date>/<ts>_v3.log). To be applied to the other background loops and to any log that grows.",
+ "controle": "In full mode: more than one _copie_cloud copy of the same file in a day = a growing log to split.",
+ "date": "2026-10-16",
+ "id": "LC-024",
+ "preuve": "Tests test_relais_github_v5, class Journal (4 tests).",
+ "regle": "Every log written by a process that runs during backups is split into files written only once (one per active pass, or per event), never extended. A pass without activity writes nothing; an alert that persists is noted only once. The standard output of a background loop stays empty except on a fatal error.",
+ "skills": [
+  "sync-cloud-pc"
+ ],
+ "source": "Relay batch 20261016_095006: the relay's log for the day, extended at each pass, was sent each time into a new _copie_cloud_<date>_<HHMM> on the PC (up to 144 copies per day and per log).",
+ "statut": "proposee",
+ "titre": "A growing file + never overwrite = one copy per backup: write immutable logs"
+}

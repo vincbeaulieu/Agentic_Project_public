@@ -1,0 +1,14 @@
+{
+ "application": "moteur_revision_multi v5, renumeroter_references v6; skill application-corrections-rapport (technical acceptance test, moves).",
+ "controle": "evaluer_travail D1 (validate.py --original --author) and D3 (docx_couches v5).",
+ "date": "2026-10-16",
+ "id": "LC-026",
+ "preuve": "Tests test_moteur_revision_multi_v4/v5 (controls v3/v4) and test_renumeroter_references_v6.",
+ "regle": "When a moved passage carries revisions by another author: at the source, nest their insertions in the moveFrom (text in w:t) and leave their deletions beside it; in the copy, do not duplicate their revisions (freeze them, on the user's decision); give new identifiers to the copied revisions; check validate.py --original --author AND the exact rejection (docx_couches) before delivery.",
+ "skills": [
+  "application-corrections-rapport"
+ ],
+ "source": "15_renumerotation_references: moves faithful to Word (the other author's revisions nested and duplicated in the copy) passed the exact check (rejection = source) but failed the tracked-changes check of the docx skill, which matches revisions by author, date and text, and makes visible on rejection all the deleted text contained in a moveFrom.",
+ "statut": "proposee",
+ "titre": "Tracked move of a passage that carries another author's revisions: test against the tracked-changes check before delivering"
+}

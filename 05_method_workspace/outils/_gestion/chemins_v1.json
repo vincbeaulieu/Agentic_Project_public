@@ -1,0 +1,22 @@
+{
+ "note": "Registre central des dossiers de l'espace : clé logique → nom réel (cc_lib_v4.chemin, moteur _raccourci_v3, outils autonomes). Renommage du 15 oct. 2026 (plan_renommage_dossiers_20261015_v1).",
+ "chemins": {
+  "bancs": "bancs_essai_outils",
+  "catalogue": "catalogue_outils",
+  "delegations": "delegations_agents",
+  "entrainement": "entrainement_classifieurs",
+  "guides": "guides_methode",
+  "journal": "journal_evenements_outils",
+  "lecons": "lecons_apprises",
+  "memoire": "memoire_methodologique",
+  "procedures": "procedures_exploitation",
+  "propositions": "skills_propositions_a_reviser",
+  "regles": "regles_travail",
+  "revues": "revues_audits_quotidiens",
+  "skills_atelier": "skills_atelier_de_propositions",
+  "skills_ressources": "skills_ressources_par_skill",
+  "taches": "taches_types_automatisables",
+  "tests": "tests_outils",
+  "outils": "outils"
+ }
+}

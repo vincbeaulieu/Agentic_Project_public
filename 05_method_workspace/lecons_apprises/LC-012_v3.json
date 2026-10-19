@@ -1,0 +1,15 @@
+{
+ "application": "Delegation register (delegation tool): type, schema, evaluator, score, automation leads.",
+ "controle": "delegation:verifier",
+ "date": "2026-10-16",
+ "id": "LC-012",
+ "preuve": "Instruction. | v3: investigation of the recurrences of 16 Oct 2026 (PLAN_recidives_outils_v2.md).",
+ "regle": "Every sub-delegated task has a typed output (schema) and a deterministic evaluation script with hard rules; the automatable steps of the task type are noted and automated over the course of use, without a reasoning LLM — reusing first: the tool that already covers the step (tool catalogue, chercher_outil, project scripts), otherwise a new version of the closest tool, and only as a last resort a new tool, with `CATALOGUE CONSULTÉ` (\"CATALOGUE CONSULTED\") at the top (v3, 16 Oct 2026: the phrase \"becomes a tool\" pushed people to create without searching; tools recreated: verifier_noms, porte_livraison).",
+ "skills": [
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive"
+ ],
+ "source": "The user, \"parenthetical note\" of 15 Oct.",
+ "statut": "proposee",
+ "titre": "Every delegation has its deterministic evaluator"
+}

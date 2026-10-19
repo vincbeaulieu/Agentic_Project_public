@@ -1,0 +1,15 @@
+{
+ "id": "LC-033",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "Evidence is copied from a search result, never from memory",
+ "regle": "A quote \"…\" (¶paraId), a count or a file name put into a judgement or a report comes from a tool output of this turn (search, extraction), copied as is; then verifier_citations (v5 or later) passes without failure before saving. A paraId typed from memory is an error, even if it is caught afterwards.",
+ "source": "Session of 2026-10-16: two invented paraIds (¶39C2B70C for Table 1, ¶0A9C2A5F for a header) rejected by verifier_citations; a false statement sent to the user (\"(7.1)\" faulty cross-reference, in fact equation 7.1).",
+ "preuve": "02_jugements/moi/jugements_fils_p5_v1.json (failure) → v2; jugements_reperes_r2_v1.json (failure) → v2; message to the user corrected.",
+ "application": "Comparisons, logs, replies to threads; next tool: generation of the evidence skeleton by chercher_v2 (quote and ¶ copied automatically).",
+ "controle": "verifier_citations: 0 failures on every judgment file before delivery; recurrence counted in the performance table.",
+ "skills": [
+  "journal-modifications-d14",
+  "orchestration-agents-recursive"
+ ]
+}

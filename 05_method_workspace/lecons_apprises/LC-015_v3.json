@@ -1,0 +1,16 @@
+{
+ "application": "file_lmstudio, worker_lmstudio; donnees_entrainement_v1 (00_competences_claude/entrainement/); entrainer_classifieur_v1 (numpy, torch optional, npz checkpoints).",
+ "controle": "banc_reprise (bit-identical resumption); adoption by cross-validation on the gold set",
+ "date": "2026-10-16",
+ "id": "LC-015",
+ "preuve": "Messages of 15 Oct 2026 (Redis queue or input folder, FIFO then priorities without starvation, do not wait, trained zero-shot classifiers). | v3: investigation of the recurrences of 16 Oct 2026 (PLAN_recidives_outils_v2.md).",
+ "regle": "Micro-tasks for local models go through a file-based queue (input, output), processed continuously by a permanent worker: priority scheduler with aging (no starvation), grouping by model (few context switches), thinking turned off. I never wait for LM Studio: I drop off, I work, I collect. Any redundant task becomes a tool. Classifiers are not provided: I develop them like any tool (ML development) — model code, a training directory fed over the course of each job (gold: my verified judgements and the user's corrections; silver: local model + rules; bronze: rule only), training on CPU when the GPU is absent or busy, portable checkpoints to move to the GPU where training stopped, test bench before adoption, then routing by confidence threshold (sure: without LLM; uncertain: delegated micro-task, whose answer comes back as an example) — reusing first: the tool that already covers the step (tool catalogue, chercher_outil, project scripts), otherwise a new version of the closest tool, and only as a last resort a new tool, with `CATALOGUE CONSULTÉ` (\"CATALOGUE CONSULTED\") at the top (v3, 16 Oct 2026: the phrase \"becomes a tool\" pushed people to create without searching; tools recreated: verifier_noms, porte_livraison).",
+ "skills": [
+  "cadre-travail-deterministe",
+  "cowork-with-lmstudio",
+  "orchestration-agents-recursive"
+ ],
+ "source": "The user, message of 15 Oct 2026: \"take this as a lesson. when saying automate everything, I mean it.\"; clarification of 15 Oct: \"The classifiers are part of your task […] assign it a training directory […] implement checkpoints such that you can switch from CPU to GPU quickly\".",
+ "statut": "proposee",
+ "titre": "Automate everything: queue, scheduler, never wait, classifiers to develop"
+}

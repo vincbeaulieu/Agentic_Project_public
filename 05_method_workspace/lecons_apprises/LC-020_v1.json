@@ -1,0 +1,16 @@
+{
+ "application": "12_harmonisation_mise_en_forme: plan approved (TRAVAIL_v2.approbation_plan), 36 tests including one control, trial on the report, real acceptance, then delivery with a `CONFORME` (\"COMPLIANT\") verdict.",
+ "controle": "A versioned plan and a quoted approval present in TRAVAIL before any change to a deliverable (to be automated in evaluer_travail)",
+ "date": "2026-10-16",
+ "id": "LC-020",
+ "preuve": "12_harmonisation_mise_en_forme/01_plan/plan_correctif_mise_en_forme_v1.md; TRAVAIL_v2.json; tests_outils/test_harmoniser_mise_en_forme_v2.py (AcceptationReelle.test_temoin_sans_h8).",
+ "regle": "For any defect flagged in a deliverable: (1) investigate the cause and provenance (author, version, mechanism) with a deterministic tool; (2) present the findings; (3) plan the correction (rules, number of corrections, cases left for decision) in a versioned plan; (4) test: unit tests with a control that shows the test detects the defect, trial on the real document, check against the target environment; (5) present the plan and the results; (6) apply only after agreement, in a new version, with the approval cited in TRAVAIL; (7) update the tools, the lessons and the skills (proposals).",
+ "skills": [
+  "application-corrections-rapport",
+  "cadre-travail-deterministe",
+  "revue-critique-rapport"
+ ],
+ "source": "The user's request (2026-10-16): \"investigate why and how these inconsistencies ended up in the document. identify, present what you found, then plan a corrective plan applied to the problem, run your test cases, present your plan, and if accepted, apply the changes. Also update the relevant skills with this approach, and record it as a lesson\".",
+ "statut": "proposee",
+ "titre": "Corrective approach: investigate, present, plan, test, present, apply after agreement"
+}

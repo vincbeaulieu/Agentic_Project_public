@@ -1,0 +1,14 @@
+{
+ "id": "LC-028",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "Validate the schema in absolute terms, not only the new errors",
+ "regle": "Every delivered docx passes a full XSD validation (validate.py without --original, or xsd_complet) with 0 errors in word/; the comparison with the source (--original) is not enough, because it ignores an error already present in the source, compared by message without line number.",
+ "source": "The user's message (2026-10-16): \"the word documents you recently delivered to me have unreadable content. why?\" — cause: 6 schema errors (equation inserted under tracked changes, w:ins in m:r) present since v6.0.4-rev1 and masked by --original at each pass.",
+ "preuve": "16_version_finale/02_diagnostic_illisible/diagnostic_contenu_illisible_v1.md; xsd_complet_v1.json",
+ "application": "Tool evaluer_travail (check D1) and the docx skill for revision passes.",
+ "controle": "Check F1 of the deliverable: 0 XSD errors in absolute terms.",
+ "skills": [
+  "cadre-travail-deterministe"
+ ]
+}

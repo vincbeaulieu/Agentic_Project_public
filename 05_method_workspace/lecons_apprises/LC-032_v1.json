@@ -1,0 +1,16 @@
+{
+ "id": "LC-032",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "Never assume a tool works: negative test that proves the injection, real opening, format compared with the reference, images looked at",
+ "regle": "Before believing a check is \"compliant\": (a) the check has a negative test (deliberately faulty file) and the test first verifies that the defect was really injected; (b) a tool called without a file or with wrong arguments must fail, not return \"{}\"; (c) a delivered docx is really opened (LibreOffice conversion) and its pages looked at; (d) its effective formatting is compared by a tool with that of the reference document (font, sizes, headings, bullets, tables); (e) the text contained in images is re-read like the rest; (f) the skill that names a tool version is checked against the highest version present. For every defect found: new version of the tool, case added to the test bench, search for the same defect in the deliverables already delivered.",
+ "source": "The user's message of 2026-10-16: \"tool errors not identified or corrected: formatting of delivered reports deviating from the expected format, font error, font size, bullet point […] assumption that the tools work well\".",
+ "preuve": "Session of 2026-10-16: logs delivered in Calibri 9.5 pt and blue headings against Times New Roman 11 pt (comparer_format_v1: 13 deviations); xsd_complet called with wrong arguments → \"{}\"; test injection ineffective (ns0 prefix); docx valid for validate.py but rejected by LibreOffice; Figures 1 and 2 not regenerated (old labels) despite the v6.0.12 consistency check; sync_cloud_pc_v5 launched according to the skill whereas v7 is in service; detecter_noms_v2 broken by the reorganisation of the tools.",
+ "application": "Every docx deliverable (construire_docx_format_rapport_v5, audit_mise_en_forme_v2, comparer_format_v1, tests_negatifs_validation_v1); skills sync-cloud-pc, cadre-travail-deterministe.",
+ "controle": "06_controles/controles_livrable_*.md present for each deliverable, with the rows: negative test, real opening, compared format, images.",
+ "skills": [
+  "orchestration-agents-recursive",
+  "cadre-travail-deterministe",
+  "sync-cloud-pc"
+ ]
+}

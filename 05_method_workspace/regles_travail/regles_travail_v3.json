@@ -1,0 +1,187 @@
+{
+ "version": 3,
+ "date": "2026-10-15",
+ "origine": "The user's instructions (CLAUDE.md; messages of 15 Oct 2026; threads F310-F315 of rev1)",
+ "gravites": {
+  "bloquant": "the deliverable cannot be delivered",
+  "majeur": "to be fixed before delivery",
+  "mineur": "to be fixed at the next pass"
+ },
+ "regles": [
+  {
+   "id": "O1",
+   "famille": "organisation",
+   "gravite": "mineur",
+   "texte": "The work folder is named NN_sujet (two digits, underscore, lowercase letters, digits and underscores).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "O2",
+   "famille": "organisation",
+   "gravite": "majeur",
+   "texte": "Mandatory subfolders: 00_sources, 95_journal, 98_livrables, 99_livrables_modifiables.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "O3",
+   "famille": "organisation",
+   "gravite": "mineur",
+   "texte": "Permitted first-level subfolders: 00_sources; 01_ to 89_ (steps, in order); 90_scripts; 95_journal; 98_livrables; 99_livrables_modifiables.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "O4",
+   "famille": "organisation",
+   "gravite": "mineur",
+   "texte": "At the root of the work folder, only LISEZMOI_vN.md and TRAVAIL_vN.json.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "O5",
+   "famille": "organisation",
+   "gravite": "majeur",
+   "texte": "TRAVAIL_vN.json describes the work: sujet, source, auteur_revisions, version_cible, couverture (range of unmodifiable paragraphs), auteurs_relecteurs.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "O6",
+   "famille": "organisation",
+   "gravite": "majeur",
+   "texte": "LISEZMOI_vN.md present: role of each folder, state of the work, deliverables.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "E1",
+   "famille": "integrite",
+   "gravite": "bloquant",
+   "texte": "00_sources contains sha256_sources_vN.txt; each source appears in it and its checksum is unchanged.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "E2",
+   "famille": "integrite",
+   "gravite": "majeur",
+   "texte": "The files in 00_sources are read-only.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "E3",
+   "famille": "integrite",
+   "gravite": "bloquant",
+   "texte": "98_livrables contains empreintes_livrables_vM.0.0.txt; each deliverable appears in it, its checksum is unchanged, and the file is read-only.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "E4",
+   "famille": "integrite",
+   "gravite": "majeur",
+   "texte": "Each deliverable in 98_livrables has its copy of the same name in 99_livrables_modifiables.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "E5",
+   "famille": "integrite",
+   "gravite": "bloquant",
+   "texte": "Never overwrite: since the previous manifest (95_journal/manifestes), no file has changed content or disappeared (an append-only file is flagged, non-blocking).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "N1",
+   "famille": "nommage",
+   "gravite": "majeur",
+   "texte": "Every file carries a version: nom_vN.ext, Nom_vX.Y.Z[a|c][_variante].ext or nom_AAAAMMJJ_HHMM.ext (exempt: 00_sources, trial and technical folders).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "N2",
+   "famille": "nommage",
+   "gravite": "mineur",
+   "texte": "No spaces or accents in the names created by Claude (except in 00_sources).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "N3",
+   "famille": "nommage",
+   "gravite": "majeur",
+   "texte": "Deliverables (98, 99): version = version_cible of TRAVAIL, equal to the expected version: a rule or decision of the user specific to the document, recorded in TRAVAIL (decision_version, approved by the user; e.g. report: source v6.0.4-rev1 → v6.0.5-rev1), otherwise the general convention v(X+1).0.0, X = initial version of the source; all the deliverables of the folder carry this version. Does not apply to tools (versioning _vN).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "N4",
+   "famille": "nommage",
+   "gravite": "mineur",
+   "texte": "Revision of a document outside the deliverables: vX.Y.N followed by c (Claude) or a (author), N increasing.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "N5",
+   "famille": "nommage",
+   "gravite": "majeur",
+   "texte": "A version (name, version, variant, extension) designates only one content throughout the folder.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "K1",
+   "famille": "commentaires",
+   "gravite": "majeur",
+   "texte": "Comment by a Claude author in a Word deliverable: at most 400 characters, starts with `Fait :` (\"Done:\"), `Proposition :` (\"Proposal:\"), `Données :` (\"Data:\"), `Question :` (\"Question:\"), `Non retenu :` (\"Not retained:\") or `Conforme :` (\"Compliant:\") (or a [Correction …] header).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "K2",
+   "famille": "commentaires",
+   "gravite": "majeur",
+   "texte": "A single reply per thread for the author of the pass.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "D1",
+   "famille": "docx",
+   "gravite": "bloquant",
+   "texte": "Word deliverable: XSD validation and tracked-changes validation successful (validate.py of the docx skill).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "D2",
+   "famille": "docx",
+   "gravite": "bloquant",
+   "texte": "All the comments of the source are present, text intact.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "D3",
+   "famille": "docx",
+   "gravite": "bloquant",
+   "texte": "Rejecting the revisions of the author of the pass gives back the source (text, formatting, revisions of the other authors).",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "D4",
+   "famille": "docx",
+   "gravite": "bloquant",
+   "texte": "The coverage (range declared in TRAVAIL) is unchanged.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "D5",
+   "famille": "docx",
+   "gravite": "majeur",
+   "texte": "A single new revision author per pass, the one declared in TRAVAIL.",
+   "controle": "evaluer_travail"
+  },
+  {
+   "id": "L3",
+   "famille": "lecons",
+   "gravite": "bloquant",
+   "texte": "Lesson L3: the revisions of the reviewers present in the source remain present in the deliverable under tracked changes (never accepted in bulk).",
+   "controle": "evaluer_travail"
+  }
+ ],
+ "historique": [
+  {
+   "date": "2026-10-15",
+   "regle": "N3",
+   "motif": "\"next free major\" removed: outside the user's convention; rule specific to the report recorded in TRAVAIL"
+  }
+ ]
+}

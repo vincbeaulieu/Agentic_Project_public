@@ -1,0 +1,90 @@
+"""
+OUTIL: croiser_demandes
+VERSION: 4
+RESUME: Contrôle déterministe des leçons LC-008 et LC-009 : croise le type de chaque demande (fil de commentaire ou segment du transcript, classé par microtaches + règles) avec ce que la passe de révision précédente a réellement fait au paragraphe d'ancrage et dans sa section (caractères insérés et supprimés par l'auteur de cette passe, paragraphe supprimé) et avec le statut annoncé dans sa réponse ; rend les écarts typés et priorisés.
+USAGE: python3 croiser_demandes_v4.py <docx> <classement_demandes.json> <microtaches.jsonl> <dossiers_dir> <sortie_dossier> [--auteur "Correction - Claude"] [--seuil-deplace 0.7]
+ENTREES: docx révisé ; classement {id: {final, regle}} ; microtaches (index, genre) ; dossier_<bloc>_vN.md (réponses « [Correction rev1 | statut] »)
+SORTIES: croisement_demandes_vN.json {id: {type, regle, statut_annonce, ancre:{index,ins,dele,supprime,couverture_ailleurs}, section:{nom,ins,dele,par_supprimes}, ecarts:[code], priorite}} (« dele » = caractères supprimés par l'auteur) ; résumé ; événement dans journal/
+CATEGORIE: revision_rapport
+BANC: tests/test_croiser_demandes_v4.py
+REMPLACE: croiser_demandes_v3 (sans argument suffisant, affiche la ligne USAGE de son en-tête et sort avec le code 2, au lieu d'une trace ValueError de code 1 ; en-tête SORTIES corrigé : les clés écrites sont ancre:{index,ins,dele,supprime,couverture_ailleurs} et section:{nom,ins,dele,par_supprimes}, « dele » et non « del », clé inchangée car lue par d'autres outils) ; v3 : croiser_demandes_v2 (détecteurs chargés dans leur version courante (cc_lib_v4.importer) et non plus dans une version figée devenue inutilisable après le renommage des dossiers ; statuts lus dans la dernière version du dossier de chaque bloc (avant : toutes les versions, la dernière lue au hasard l'emportait)) ; v2 : croiser_demandes_v1 (texte d'ancrage supprimé mais repris ailleurs (couverture des mots ≥ seuil) : « déplacé », sans E1 ni E3 ; paragraphe supprimé par n'importe quel auteur compte comme suppression (E2) ; couverture rendue)
+"""
+import sys, os, re, json, glob, zipfile, collections
+from lxml import etree
+H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, H)
+from cc_lib_v1 import ecrire_versionne, derniere_version
+from cc_lib_v4 import evenement, importer
+DR = importer('detecteurs_rapport')
+W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'; q = lambda t: f'{{{W}}}{t}'
+ECARTS = {  # code : (priorité 1 forte … 3 faible, libellé)
+    'E1': (1, 'modification demandée, suppression seule faite (LC-008)'),
+    'E2': (2, 'suppression demandée, rien de supprimé'),
+    'E3': (2, 'question traitée par une suppression (LC-008 : lire la demande)'),
+    'E4': (3, 'aucune action demandée, texte modifié'),
+    'E5': (2, 'statut « Traité » annoncé, aucune révision à l’ancre ni dans la section (LC-009)'),
+    'E6': (3, 'modification demandée, aucune révision à l’ancre ni dans la section, sans statut d’attente'),
+    'D1': (3, 'texte d’ancrage supprimé ici mais repris ailleurs (déplacé) : vérifier que le déplacement répond à la demande')}
+
+
+def main():
+    a = sys.argv[1:]
+    if len(a) < 5: print('USAGE: ' + __doc__.split('USAGE: ')[1].split('\n')[0]); sys.exit(2)
+    docx, fcls, fmt, dd, out = a[:5]
+    auteur = a[a.index('--auteur') + 1] if '--auteur' in a else 'Correction - Claude'
+    z = zipfile.ZipFile(docx); P = DR.vues(z); doc = etree.fromstring(z.read('word/document.xml'))
+    rev = []                                       # caractères insérés / supprimés par l'auteur, par paragraphe
+    for xp in doc.iter(q('p')):
+        ins = sum(len(''.join(t.text or '' for t in e.iter(q('t')))) for e in xp.iter(q('ins')) if e.get(q('author')) == auteur)
+        dl = sum(len(''.join(t.text or '' for t in e.iter(q('delText'), q('t')))) for e in xp.iter(q('del')) if e.get(q('author')) == auteur)
+        rev.append((ins, dl))
+    sec = {}; cur = '(début)'
+    for p in P:
+        if p['titre'] and p['ori'].strip(): cur = p['ori'].strip()[:80]
+        sec[p['i']] = cur
+    par_sec = collections.defaultdict(list)
+    for p in P: par_sec[sec[p['i']]].append(p['i'])
+    seuil_dep = float(a[a.index('--seuil-deplace') + 1]) if '--seuil-deplace' in a else 0.7
+    index = collections.defaultdict(set)
+    for p in P:
+        if not p['toc']:
+            for t in set(DR.tokens(p['acc'])): index[t].add(p['i'])
+    def couverture(k):                     # part des mots du texte d'origine de ¶k retrouvée dans un même autre paragraphe accepté
+        T = set(DR.tokens(P[k]['ori']))
+        if len(T) < 4: return None
+        c = collections.Counter(j for t in T for j in index.get(t, ()) if j != k)
+        return round(max(c.values()) / len(T), 3) if c else 0.0
+    statut = {}
+    blocs = {re.match(r'^(dossier_B\w+?)_v\d+\.md$', os.path.basename(x)).group(1) for x in glob.glob(os.path.join(dd, 'dossier_B*_v*.md'))}
+    for f in sorted(filter(None, (derniere_version(dd, b, 'md') for b in blocs))):   # dernière version de chaque bloc
+        for m in re.finditer(r'^### Fil (\d+) [^\n]*\n(.*?)(?=^### |^## )', open(f, encoding='utf-8').read(), re.S | re.M):
+            s = re.search(r'\[Correction rev1 \| ([^\]]+)\]', m.group(2))
+            if s: statut[m.group(1)] = s.group(1).strip()
+    cls = json.load(open(fcls, encoding='utf-8'))
+    X = {json.loads(l)['id']: json.loads(l) for l in open(fmt, encoding='utf-8') if l.strip()}
+    res = {}
+    for i, c in sorted(cls.items()):
+        x = X[i]; k = x['index']; ty = c['final']
+        st = statut.get(x.get('fil', ''), '') if x.get('fil') else ''
+        ai, ad = rev[k]; anc_sup = bool(P[k]['ori'].strip() and not P[k]['acc'].strip())
+        idx = par_sec[sec[k]]; si = sum(rev[j][0] for j in idx); sd = sum(rev[j][1] for j in idx)
+        psup = sum(1 for j in idx if P[j]['ori'].strip() and not P[j]['acc'].strip())
+        E = []; cv = couverture(k) if (anc_sup or (ad > 0 and ai == 0)) else None
+        deplace = cv is not None and cv >= seuil_dep
+        if deplace: E.append('D1')
+        if ty == 'modifier' and (ad > 0 or anc_sup) and ai == 0 and si == 0 and not deplace: E.append('E1')
+        if ty == 'supprimer' and ad == 0 and sd == 0 and not anc_sup: E.append('E2')
+        if ty == 'question' and (anc_sup or (ad > 0 and ai == 0)) and not deplace: E.append('E3')
+        if ty == 'aucune' and (ai or ad): E.append('E4')
+        if st.lower().startswith('traité') and not (ai or ad or si or sd): E.append('E5')
+        if ty == 'modifier' and not (ai or ad or si or sd) and not re.search(r'attente|décision|hors', st, re.I): E.append('E6')
+        res[i] = dict(type=ty, regle=c.get('regle'), statut_annonce=st or None, ancre=dict(index=k, ins=ai, dele=ad, supprime=anc_sup, couverture_ailleurs=cv),
+                      section=dict(nom=sec[k], ins=si, dele=sd, par_supprimes=psup), ecarts=E,
+                      priorite=min([ECARTS[e][0] for e in E], default=None))
+    ch, _ = ecrire_versionne(out, 'croisement_demandes', 'json', json.dumps(res, ensure_ascii=False, indent=0, sort_keys=True))
+    cpt = collections.Counter(e for r in res.values() for e in r['ecarts'])
+    evenement('croiser_demandes', 4, 'croisement', dict(demandes=len(res), ecarts=dict(cpt)))
+    print(ch); print(len(res), 'demandes ;', ', '.join(f'{e} {cpt[e]} ({ECARTS[e][1]})' for e in sorted(cpt)))
+
+
+if __name__ == '__main__':
+    main()

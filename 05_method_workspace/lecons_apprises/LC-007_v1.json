@@ -1,0 +1,14 @@
+{
+ "application": "Do not restrict a model on the basis of a single trial.",
+ "controle": "banc",
+ "date": "2026-10-08",
+ "id": "LC-007",
+ "preuve": "opus/low F1 0.91; sonnet/low 0.86; haiku/low 0.80.",
+ "regle": "Review of a short document: all three models at low effort find the critical errors; to be confirmed on a long document.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ],
+ "source": "orchestration-agents-recursive, run2 (R1)",
+ "statut": "validee",
+ "titre": "Provisional model routing (n = 1)"
+}
