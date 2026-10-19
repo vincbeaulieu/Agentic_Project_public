@@ -1,0 +1,15 @@
+{
+ "application": "Every added reference becomes a question.",
+ "controle": "manuel",
+ "date": "2026-10-08",
+ "id": "LC-006",
+ "preuve": "Run2.",
+ "regle": "Volume, pages and DOI added by a model come from its memory: always mark them \"to verify\" in the questions to the author.",
+ "skills": [
+  "orchestration-agents-recursive",
+  "revue-critique-rapport"
+ ],
+ "source": "orchestration-agents-recursive, run2 (L6)",
+ "statut": "validee",
+ "titre": "Added bibliographic details = to verify"
+}

@@ -1,0 +1,7 @@
+{
+ "version": 1,
+ "date": "2026-10-19",
+ "methode": "sha256('cc-noms|' + normalized token: lower case, no accents)[:16]; tokens = runs of letters",
+ "empreintes": [],
+ "note": "Public edition: empty list. In a private workspace, add the truncated SHA-256 fingerprints of the names to protect."
+}

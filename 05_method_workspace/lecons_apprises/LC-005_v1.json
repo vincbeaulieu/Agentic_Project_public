@@ -1,0 +1,15 @@
+{
+ "application": "Detectors of broken cross-references after application.",
+ "controle": "detecteurs_rapport:DR-02",
+ "date": "2026-10-08",
+ "id": "LC-005",
+ "preuve": "Only A1b fixed Figure 2 → 3 after renumbering.",
+ "regle": "The brief requires a correction to be propagated everywhere it has consequences (cross-references, numbers).",
+ "skills": [
+  "orchestration-agents-recursive",
+  "application-corrections-rapport"
+ ],
+ "source": "orchestration-agents-recursive, run2 (L5)",
+ "statut": "validee",
+ "titre": "Propagate a correction everywhere"
+}

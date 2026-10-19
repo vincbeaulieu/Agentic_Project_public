@@ -1,0 +1,14 @@
+{
+ "id": "LC-030",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "The relay loop must re-read the list of work folders",
+ "regle": "A long-running backup process recomputes the list of work folders at each pass; otherwise a folder created after its launch is never sent.",
+ "source": "Session of 2026-10-16: 16_version_finale, created after the loop was launched, was not sent (DOSSIERS list computed at import); loop restarted.",
+ "preuve": "relais_github/20261016: pass 15:53, 1382 files sent after restart",
+ "application": "Tool relais_github (loop) and sync_cloud_pc (DOSSIERS).",
+ "controle": "After a work folder is created, the next backup run sends it.",
+ "skills": [
+  "sync-cloud-pc"
+ ]
+}

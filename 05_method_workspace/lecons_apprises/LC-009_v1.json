@@ -1,0 +1,17 @@
+{
+ "application": "Required fields point / demande / correctif / regle_le_point / nouveau_probleme / statut_vrai / verdict; detectors DR-01 to DR-06 on the accepted view.",
+ "controle": "detecteurs_rapport:DR-01,DR-02,DR-03,DR-04,DR-05,DR-06",
+ "date": "2026-10-15",
+ "id": "LC-009",
+ "preuve": "F310: new problem not seen (references [3] and [4] orphaned).",
+ "regle": "For each fix: the point raised word for word with its source; the fix resolves it fully and correctly; no new problem (unique information lost, orphaned reference or cross-reference, error, contradiction); the announced status is true.",
+ "skills": [
+  "application-corrections-rapport",
+  "revue-critique-rapport",
+  "orchestration-agents-recursive",
+  "journal-modifications-d14"
+ ],
+ "source": "rev1, thread F314",
+ "statut": "validee",
+ "titre": "Check that the fix resolves the point raised, before applying it"
+}

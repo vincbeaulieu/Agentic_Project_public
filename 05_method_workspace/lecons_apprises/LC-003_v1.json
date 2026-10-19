@@ -1,0 +1,14 @@
+{
+ "application": "Two-pass merge.",
+ "controle": "manuel",
+ "date": "2026-10-08",
+ "id": "LC-003",
+ "preuve": "Merge v1: 6 \"conflicts\", 0 real; v2: 3 wording conflicts, 20 comments kept.",
+ "regle": "Separate comments (empty proposal or one identical to the anchor) from corrections before detecting conflicts.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ],
+ "source": "orchestration-agents-recursive, run2 (L3)",
+ "statut": "validee",
+ "titre": "Separate comments from corrections before conflicts"
+}

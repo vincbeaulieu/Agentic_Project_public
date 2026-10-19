@@ -1,0 +1,14 @@
+{
+ "application": "Org chart with a single launch level; the sub-levels are launched by A0.",
+ "controle": "manuel",
+ "date": "2026-10-08",
+ "id": "LC-001",
+ "preuve": "A1 (sonnet) could not launch A1.1; tool absent even via ToolSearch.",
+ "regle": "An agent launched by A0 (the lead agent) does not have the Agent tool: recursion is planned and run from A0.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ],
+ "source": "orchestration-agents-recursive, test 1 (L1)",
+ "statut": "validee",
+ "titre": "Agent recursion is planned from A0"
+}

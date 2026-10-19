@@ -1,0 +1,15 @@
+{
+ "application": "The test bench measures the seven dimensions; a new version is adopted only if quality, alignment and determinism do not drop.",
+ "controle": "banc",
+ "date": "2026-10-15",
+ "id": "LC-011",
+ "preuve": "Instruction.",
+ "regle": "Performance = alignment, quality, speed, resources used, resources consulted, compactness, deterministic automation: each is measured separately.",
+ "skills": [
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive"
+ ],
+ "source": "The user, message of 15 Oct.",
+ "statut": "validee",
+ "titre": "Performance has several dimensions"
+}

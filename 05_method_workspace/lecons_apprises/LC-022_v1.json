@@ -1,0 +1,15 @@
+{
+ "application": "Skills orchestration-agents-recursive and cadre-travail-deterministe (\"The org chart is approved before any agent launch\") to be updated.",
+ "controle": "Count of simultaneous agents on the dashboard (G-AG)",
+ "date": "2026-10-16",
+ "id": "LC-022",
+ "preuve": "Message of 2026-10-16.",
+ "regle": "I can launch up to 5 agents at a time without an approved org chart; beyond that, the org chart remains subject to the user's approval. Deterministic tasks remain scripts (LC-021).",
+ "skills": [
+  "orchestration-agents-recursive",
+  "cadre-travail-deterministe"
+ ],
+ "source": "The user's message (2026-10-16): \"You do not need my approval to run agents with a limit of 5 agents.\"",
+ "statut": "proposee",
+ "titre": "Agents: up to 5 without asking for approval"
+}

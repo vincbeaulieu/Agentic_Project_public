@@ -1,0 +1,14 @@
+{
+ "id": "LC-034",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "The source is authoritative: a student agent's output is a hypothesis to verify, never evidence",
+ "regle": "I study what the student agents produce, but I neither accept nor interpret what they say: verdict, reason, \"I checked\", \"absent\", self-assessment. Every retained point, even when the student agent contradicts my reference, is settled by re-reading the source (text, image, data); a student agent's quote is re-verified by script, an absence is searched for again, an image is looked at by me. Their remarks on the instructions are leads to evaluate, not findings.",
+ "source": "The user's message of 2026-10-16: \"study what your sub-agents produce, but you must be aware that the source of truth is the source, so you must not accept or interpret what the sub-agents say or mention (because it may be wrong too).\"",
+ "preuve": "v6.0.9 revisions: agent replies `Traité` (\"Addressed\") accepted without re-reading the source, contradicted afterwards (threads 679, 681, 696).",
+ "application": "Skill orchestration-agents-recursive (Step 5, comparison); comparer_eleves_reference.",
+ "controle": "In the comparison audit, each disagreement carries the evidence A0 took from the source (verified quotation or image viewed), distinct from the student agent's.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ]
+}

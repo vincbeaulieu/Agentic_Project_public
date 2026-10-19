@@ -1,0 +1,16 @@
+{
+ "application": "Restate each request in one sentence before handling it; detector for replacement requests whose requested text is absent.",
+ "controle": "detecteurs_rapport:DR-07",
+ "date": "2026-10-15",
+ "id": "LC-008",
+ "preuve": "F310: deletion of §1.1 accepted (`Traité` (\"Addressed\")) although the guest asked for the report's objective to be written there; [3] and [4] became orphaned.",
+ "regle": "A deletion accompanied by \"it is not X that is needed here, but Y\" is a replacement of X by Y: the comment text sets the request; `Traité` only if Y appears in the report.",
+ "skills": [
+  "application-corrections-rapport",
+  "revue-critique-rapport",
+  "journal-modifications-d14"
+ ],
+ "source": "rev1, threads F310 to F315 (§1.1); validated by the user's instruction to update the skills (15 Oct)",
+ "statut": "validee",
+ "titre": "Read the request, not only the editing action"
+}

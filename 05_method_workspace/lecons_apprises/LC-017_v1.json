@@ -1,0 +1,15 @@
+{
+ "application": "detecteurs_rapport_v5 in essayer_reeval and before livrer; deterministic fix with a consistency check (number of gaps = number of pasted fragments).",
+ "controle": "detecteurs_rapport_v5 DR-08 DR-09",
+ "date": "2026-10-15",
+ "id": "LC-017",
+ "preuve": "11_reevaluation/03_outils_essais/detecteurs/detecteurs_rev1_v5.json; 08_correctifs/ops_DR09_terme_v3.py.",
+ "regle": "Every pass that replaces a term in paragraphs under tracked changes is followed by the detectors DR-08 (colleague's suggestion half-neutralised) and DR-09 (broken text) on the accepted view; a new finding blocks delivery.",
+ "skills": [
+  "application-corrections-rapport",
+  "cadre-travail-deterministe"
+ ],
+ "source": "rev1 defect found by DR-09: \"term A\" replaced by \"term B\" inserted at the end of a paragraph (7 paragraphs, 15 gaps: \"that of the  (5%\", \"…).ELEL\").",
+ "statut": "proposee",
+ "titre": "After a term replacement under tracked changes, check the accepted view"
+}

@@ -1,0 +1,14 @@
+{
+ "application": "No agent synchronises or writes outside its own folder.",
+ "controle": "manuel",
+ "date": "2026-10-08",
+ "id": "LC-002",
+ "preuve": "Lock A2 → A1 → A0 without conflict but in series (~40 s each).",
+ "regle": "Agents produce change documents; A0 merges, applies and synchronises once.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ],
+ "source": "orchestration-agents-recursive, test 1 (L2)",
+ "statut": "validee",
+ "titre": "A single PC synchronisation, by A0"
+}

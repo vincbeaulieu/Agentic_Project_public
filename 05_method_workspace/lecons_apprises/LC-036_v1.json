@@ -1,0 +1,19 @@
+{
+ "application": "Skills cadre-travail-deterministe v6 (§ Diagnose), orchestration-agents-recursive v8 (principles, Step 6), sync-cloud-pc v2 (good practices); LISEZMOI_CLAUDE v5.",
+ "controle": "Count checked against the source in delegation v4; \"hypothesis / finding\" in my messages; possible consolidation with LC-034 (the source is authoritative, for the student agents as for me).",
+ "date": "2026-10-16",
+ "histoire": "16 Oct 2026: the delegation register answers \"0\". I blame the tool (false), then my calling it only through PYTHONPATH (half true: the tool's D-0001 filter also ignored the 6 files). Both times, announced to the user as a fact. The same day: \"waiting for 25 minutes\" (less than 11 in reality), \"yesterday's catalogue from 19:16\" (reading an ls sorted in alphabetical order).",
+ "id": "LC-036",
+ "morale": "What explains is not necessarily what causes: an explanation that fits remains a hypothesis until the source has confirmed it, even when I am the one putting it forward, and even when I blame myself.",
+ "preuve": "Dashboard, errors 24, 31 and 19 (family C and A); plan PLAN_recidives_outils_v2.md.",
+ "regle": "I say \"hypothesis\" as long as it is not verified. I verify through the normal call of the tool, in the source (files, independent counts), and I watch the symptom disappear after the fix; if it remains, there is another cause. A duration, a date, a number is calculated before being written. \"Fixed\" means in service and verified.",
+ "signe": "I no longer have to correct, in front of the user, a diagnosis that I had asserted to them; family C of the dashboard with no new occurrence.",
+ "skills": [
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive",
+  "sync-cloud-pc"
+ ],
+ "source": "Exchange with the user of 16 Oct 2026 (\"tell yourself that a lesson is also subject to improvement… what is the definition of a lesson? what is a lesson for? It is like when we say: moral of the story\").",
+ "statut": "proposee",
+ "titre": "What explains is not necessarily what causes"
+}

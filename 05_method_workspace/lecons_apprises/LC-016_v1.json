@@ -1,0 +1,15 @@
+{
+ "application": "file_lmstudio_v2 in local mode; microtaches_v3+ (window.__T, window.__run).",
+ "controle": "manuel",
+ "date": "2026-10-15",
+ "id": "LC-016",
+ "preuve": "Pilot: 13.6 k characters copied for 27 tasks; batch of 155 requests: 28 k characters copied.",
+ "regle": "No micro-task data passes through my replies: drop-off as a file (tool launched on the PC or file upload), results brought back as a file, only compact summaries read. A payload already sent is kept browser-side (window, localStorage) so that it can be reused by other models or instructions.",
+ "skills": [
+  "cowork-with-lmstudio",
+  "cadre-travail-deterministe"
+ ],
+ "source": "Observation (pilot 07_microtaches of 15 Oct.): a payload sent to LM Studio by a JavaScript call in the conversation costs as many output tokens as re-reading it.",
+ "statut": "proposee",
+ "titre": "Transporting the payload costs tokens: go through files"
+}

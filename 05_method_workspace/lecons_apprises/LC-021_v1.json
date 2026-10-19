@@ -1,0 +1,16 @@
+{
+ "application": "Encrypted GitHub relay to be built as soon as the private repository is attached; in the meantime, batches prepared in the background (Bash run_in_background) and sending interleaved.",
+ "controle": "Review: any delegation of a task that needs no judgment to an agent is flagged (dashboard, to be automated)",
+ "date": "2026-10-16",
+ "id": "LC-021",
+ "preuve": "Exchanges of 2026-10-16; network test: OneDrive and Google Drive blocked, GitHub reachable from the cloud workspace.",
+ "regle": "A fully deterministic task (backup, packaging, checksum verification, conversions) runs as a background script, with a resume log, without an agent or attention. For a transfer to the PC, prefer a relay that works on its own (private GitHub repository, encrypted data; or a synchronised file service) to one-by-one calls; an agent is justified only for judgement.",
+ "skills": [
+  "sync-cloud-pc",
+  "cadre-travail-deterministe",
+  "orchestration-agents-recursive"
+ ],
+ "source": "The user's message (2026-10-16): \"this kind of task does not need a sub-agent, it can be programmed deterministically and run in the background server-side without any attention being needed\"; then \"google drive and onedrive have existed since well before artificial intelligence\" and \"Github is an excellent idea\".",
+ "statut": "proposee",
+ "titre": "Deterministic task: a background script, not an agent"
+}

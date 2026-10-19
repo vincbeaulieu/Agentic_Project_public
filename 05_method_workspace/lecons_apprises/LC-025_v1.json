@@ -1,0 +1,15 @@
+{
+ "application": "Skills application-corrections-rapport (response statuses, closing of threads) and orchestration-agents-recursive (double judgement for any irreversible decision); tools supprimer_fils v1 and evaluer_travail v10 (acceptance mode: only the listed threads disappear).",
+ "controle": "evaluer_travail v10, D2: a deleted thread must appear in the approved list; decision register with both verdicts.",
+ "date": "2026-10-16",
+ "id": "LC-025",
+ "preuve": "03_jugement/registre_decisions_fils_v2.json and the checks of batches 11 to 15 of 14_travail_finition.",
+ "regle": "Before deleting or closing a thread, check against the \"all accepted\" view that the request in the requester's last message is satisfied entirely and at every location, with no defect left by the fix. The status of a reply (`Traité` (\"Addressed\")) is only a hypothesis. Any deletion requires the agreement of two independent judges (the second did not make the first judgement); when in doubt, the thread is kept.",
+ "skills": [
+  "application-corrections-rapport",
+  "orchestration-agents-recursive"
+ ],
+ "source": "14_travail_finition (v6.0.8-rev1): of 144 threads announced `Traité` or `Sans objet` (\"Not applicable\"), 42 are not satisfied in the text; of 147 threads judged addressed by a first agent, a second independent agent rejected 35 (defect left in the same place or at another location: truncated sentence, wrong count, broken cross-reference, inconsistent value).",
+ "statut": "proposee",
+ "titre": "Closing a comment thread requires evidence in the text: never the announced status alone, and a second judge for any deletion"
+}

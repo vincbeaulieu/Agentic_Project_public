@@ -1,0 +1,66 @@
+{
+ "version": 1,
+ "date": "2026-10-19",
+ "note": "Example lexicon for outils/balayer_termes.py (public, invented terms). A real lexicon of confidential terms is kept out of any published folder.",
+ "categories": [
+  {
+   "id": "P1",
+   "nom": "Client and partner names (invented)",
+   "gravite": "bloquant",
+   "termes": [
+    "Acme Widgets",
+    "Globex"
+   ]
+  },
+  {
+   "id": "P2",
+   "nom": "Internal project codes",
+   "gravite": "bloquant",
+   "regex": [
+    "\\bPRJ-\\d{3}\\b"
+   ],
+   "casse": true
+  },
+  {
+   "id": "P3",
+   "nom": "Personal paths",
+   "gravite": "bloquant",
+   "regex": [
+    "C:\\\\Users\\\\[^\\\\\\s]+",
+    "/home/[a-z]+/Desktop"
+   ]
+  },
+  {
+   "id": "P4",
+   "nom": "Words to review in context",
+   "gravite": "a_revoir",
+   "termes": [
+    "confidential",
+    "internal only"
+   ],
+   "exceptions": [
+    "confidential(ity)? terms? (scanner|lexicon)"
+   ]
+  }
+ ],
+ "proximite": [
+  {
+   "id": "P5",
+   "nom": "'draft' near 'contract'",
+   "gravite": "a_revoir",
+   "a": [
+    "drafts?"
+   ],
+   "b": [
+    "contracts?"
+   ],
+   "fenetre": 4
+  }
+ ],
+ "exceptions": [
+  {
+   "regex": "globexample",
+   "motif": "part of an unrelated word"
+  }
+ ]
+}

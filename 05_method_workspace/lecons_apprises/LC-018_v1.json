@@ -1,0 +1,16 @@
+{
+ "application": "Tests under pwsh in a fictitious Revision; acceptance test on the PC recorded as a log step before the announcement; for a docx: real acceptance (LibreOffice) then Word acceptance test on the PC.",
+ "controle": "test_<outil> under target conditions (pwsh, real acceptance); \"acceptance test\" step closed before the announcement",
+ "date": "2026-10-16",
+ "id": "LC-018",
+ "preuve": "tests_outils/test_lancer_worker_lmstudio_v4.py; PC acceptance test of 2026-10-16 (worker active); 12_harmonisation_mise_en_forme/03_controles/confrontation_vue_acceptee_v1.txt.",
+ "regle": "A tool, script or deliverable is announced as functional only after being run under the conditions of its real use: system, interpreter and version (PowerShell 5.1, Word), real installation path (never the source copy), real data, all modes, languages and time zones. When the acceptance test can only be done on the user's machine, the delivery says so and gives the acceptance test procedure; it is not presented as verified.",
+ "skills": [
+  "cadre-travail-deterministe",
+  "cowork-with-lmstudio",
+  "application-corrections-rapport"
+ ],
+ "source": "Incident: lancer_worker_lmstudio v3 delivered as functional; failed on double-click on the PC. Cause: the \"one tool per folder\" reorganisation separated the worker's .cmd, and %~dp0 pointed to the source copy instead of the installation; nothing had been run under Windows.",
+ "statut": "proposee",
+ "titre": "Declare \"functional\" only after an acceptance test in the target environment"
+}

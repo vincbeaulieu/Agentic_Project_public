@@ -1,0 +1,14 @@
+{
+ "application": "Only a final text composed by A0 covers a whole zone.",
+ "controle": "manuel",
+ "date": "2026-10-08",
+ "id": "LC-004",
+ "preuve": "Trap case A1a-01: v2 would have deleted the start of the sentence, v3 keeps it.",
+ "regle": "A retained proposal replaces its own anchor, never the whole zone of the group.",
+ "skills": [
+  "orchestration-agents-recursive"
+ ],
+ "source": "orchestration-agents-recursive, run2 (L4)",
+ "statut": "validee",
+ "titre": "A proposal replaces its own anchor"
+}

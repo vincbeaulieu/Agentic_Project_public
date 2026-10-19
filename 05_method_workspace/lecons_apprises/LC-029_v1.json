@@ -1,0 +1,14 @@
+{
+ "id": "LC-029",
+ "date": "2026-10-16",
+ "statut": "proposee",
+ "titre": "After accepting revisions, re-read the seams",
+ "regle": "Before delivering a version in which revisions are accepted, look for defective seams: a word cut by a deletion, an insertion placed at the end of a paragraph, bold inherited from the first word, an empty paragraph left by a deletion; repair them from the tracked source and log them.",
+ "source": "Final version v6.0.10-rev1: 11 text repairs and 22 bold corrections, all due to earlier passes by Claude, invisible as long as the document stayed under tracked changes.",
+ "preuve": "16_version_finale/04_analyse_A/coutures_v2.json; 03_construction/etape_B_journal_v2.json; etape_C2_journal_v4.json",
+ "application": "Tools moteur_revision_multi (placement of insertions) and accepter_auteurs; detector coutures_v2.",
+ "controle": "Seam detector with no K1/K2/K3 case left in the accepted view.",
+ "skills": [
+  "cadre-travail-deterministe"
+ ]
+}

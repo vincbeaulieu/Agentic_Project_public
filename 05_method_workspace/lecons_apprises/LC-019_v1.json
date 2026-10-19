@@ -1,0 +1,16 @@
+{
+ "application": "controler_mise_en_forme v2 and harmoniser_mise_en_forme v2 (adopted); docx_couches v3 and evaluer_travail v8 (D3 also rejects tracked formatting); moteur_revision_multi v3 to be prepared.",
+ "controle": "controler_mise_en_forme comparer --auteur; check against the accepted view (real acceptance); evaluer_travail D3",
+ "date": "2026-10-16",
+ "id": "LC-019",
+ "preuve": "12_harmonisation_mise_en_forme/ (plan, checks, D14 log); 11_reevaluation/03_outils_essais/mise_en_forme/controle_v6.0.5-rev1_v5.json.",
+ "regle": "After each revision pass: controler_mise_en_forme comparer <avant> <après> --auteur <passe> (code 1 = pass rejected). An inserted passage takes on the properties of its neighbour; emptying a paragraph deletes its mark and aligns its properties with the next paragraph; emptying a table deletes its rows; agent text is cleaned of Markdown. Before delivery: comparison of the accepted view with a real acceptance.",
+ "skills": [
+  "application-corrections-rapport",
+  "cadre-travail-deterministe",
+  "journal-modifications-d14"
+ ],
+ "source": "Report v6.0.5-rev1: 4 headings that became body text on acceptance, 65 empty lines or bullets, 26 passages in 12 pt in an 11 pt body, 3 orphaned fragments, 2 emptied tables whose grid remained. The engine inserted passages without properties and deleted text without deleting the structures (paragraph mark, rows, caption).",
+ "statut": "proposee",
+ "titre": "Check the accepted view of every pass: formatting included"
+}
